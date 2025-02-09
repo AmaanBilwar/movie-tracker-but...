@@ -1,7 +1,8 @@
 'use client'
 import React, { useState } from 'react';
 import { Input, Button } from "@chakra-ui/react";
-
+import { auth, currentUser } from '@clerk/nextjs/server'
+ 
 interface Movie {
   id: string;
   movie_name: string;
@@ -10,6 +11,7 @@ interface Movie {
 }
 
 const Page = () => {
+
   const [searchTerm, setSearchTerm] = useState('');
   const [watchlist, setWatchlist] = useState('');
   const [movies, setMovies] = useState<Movie[]>([]);
