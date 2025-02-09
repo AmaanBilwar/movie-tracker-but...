@@ -26,7 +26,6 @@ def find_movie():
         return jsonify({'data': movie_list})
 
 
-
 @app.route('/add_movie', methods=['POST'])
 def add_movies():
     my_client = pymongo.MongoClient(MONGODB_CONNECTION_STRING)
@@ -57,7 +56,7 @@ def get_movies():
     my_db = my_client['test']
     my_col = my_db['movies']
     movies = my_col.find()
-    movie_list = [{'id': str(movie['_id']), 'movie_name': movie['movie_name'], 'movie_year': movie['movie_year']} for movie in movies]
+    movie_list = [{'id': str(movie['_id']), 'movie_name': movie['movie_name'], 'movie_year': movie['movie_year'], 'movie_description': movie.get('movie_description', '')} for movie in movies]
     return jsonify({'data': movie_list})
 
 if __name__ == '__main__':
